@@ -1,214 +1,291 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Happy Birthday My Love ❤️</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Happy Birthday, My Love ❤️</title>
+  <meta name="description" content="A romantic, responsive birthday surprise with animations for Rofaida." />
   <style>
+    :root {
+      --bg1: #fff1f7;
+      --bg2: #ffe8f2;
+      --accent: #ff6b9f;
+      --accent-dark: #ff417f;
+      --text: #3a1f2e;
+      --card: rgba(255, 255, 255, 0.65);
+      --shadow: 0 12px 40px rgba(0,0,0,0.15);
+    }
+
+    /* Base layout */
+    * { box-sizing: border-box; }
+    html, body { height: 100%; }
     body {
       margin: 0;
-      padding: 0;
-      font-family: 'Poppins', sans-serif;
-      background: radial-gradient(circle at top left, #ffd6e8, #ffeaf4, #fff0f5);
-      color: #3a1f2e;
-      text-align: center;
+      font-family: "Poppins", system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, "Helvetica Neue", Arial, "Apple Color Emoji", "Segoe UI Emoji";
+      color: var(--text);
+      background: radial-gradient(1200px 800px at 10% 10%, var(--bg1), transparent),
+                  radial-gradient(1200px 800px at 90% 90%, var(--bg2), transparent),
+                  linear-gradient(135deg, #fff5fb 0%, #ffeef7 50%, #fff8fb 100%);
       overflow-x: hidden;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
+      display: grid;
+      place-items: center;
+      padding: clamp(16px, 3vw, 32px);
+    }
+
+    .wrap {
+      width: min(900px, 100%);
+      text-align: center;
       position: relative;
     }
 
+    /* Title */
     h1 {
-      font-size: 2.4rem;
+      margin: 0 0 14px;
+      font-size: clamp(1.8rem, 4.5vw, 3rem);
+      letter-spacing: 0.5px;
       color: #d63384;
-      text-shadow: 2px 2px 8px rgba(0,0,0,0.15);
-      animation: fadeIn 2s ease-in-out;
-      z-index: 2;
+      text-shadow: 0 2px 10px rgba(214, 51, 132, 0.15);
+      animation: fadeIn 1.2s ease both;
+    }
+    .subtitle {
+      margin: 0 0 22px;
+      font-size: clamp(0.95rem, 2.4vw, 1.1rem);
+      opacity: 0.8;
+      animation: fadeInUp 1.2s 0.1s ease both;
     }
 
-    #message {
-      font-size: 1.1rem;
-      max-width: 90%;
-      margin: 20px auto;
-      line-height: 1.9;
-      opacity: 0;
-      transform: translateY(20px);
-      transition: all 1.2s ease;
-      background: rgba(255, 240, 245, 0.95);
-      padding: 22px;
-      border-radius: 18px;
-      box-shadow: 0 8px 30px rgba(0,0,0,0.15);
-      z-index: 2;
+    /* Card */
+    .card {
+      margin: 0 auto;
+      background: var(--card);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border-radius: 22px;
+      box-shadow: var(--shadow);
+      padding: clamp(16px, 4vw, 30px);
+      border: 1px solid rgba(255,255,255,0.6);
+      animation: pop 0.6s ease both;
     }
 
-    .heart {
-      font-size: 2rem;
-      color: #e63978;
-      margin-top: 15px;
-      animation: pulse 1.5s infinite;
-    }
+    .actions { margin-top: 16px; display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; }
 
     button {
-      background: linear-gradient(135deg, #ff80ab, #ff5c8d);
-      color: white;
-      border: none;
-      padding: 14px 28px;
-      font-size: 1rem;
-      border-radius: 30px;
+      appearance: none;
+      border: 0;
+      padding: 12px 20px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+      color: #fff;
+      font-weight: 600;
+      letter-spacing: 0.2px;
       cursor: pointer;
-      margin-top: 20px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-      transition: transform 0.3s, background 0.3s;
-      z-index: 2;
+      box-shadow: 0 8px 18px rgba(255, 65, 127, 0.25);
+      transition: transform .2s ease, filter .2s ease;
     }
+    button:hover { transform: translateY(-2px); filter: brightness(1.02); }
+    button:active { transform: translateY(0); }
 
-    button:hover {
-      transform: scale(1.05);
-      background: linear-gradient(135deg, #ff5c8d, #ff3366);
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
-
-    @keyframes pulse {
-      0% { transform: scale(1); }
-      50% { transform: scale(1.2); }
-      100% { transform: scale(1); }
-    }
-
-    .confetti {
-      position: fixed;
-      top: -10px;
-      width: 8px;
-      height: 8px;
-      background: #fff;
-      animation: fall 6s linear infinite;
-      z-index: 1;
-    }
-
-    @keyframes fall {
-      from { transform: translateY(0) rotate(0deg); }
-      to { transform: translateY(100vh) rotate(360deg); }
-    }
-
-    /* Floating hearts */
-    .floating-heart {
-      position: fixed;
-      bottom: -20px;
-      font-size: 1.5rem;
-      color: #ff5c8d;
-      animation: floatUp 6s linear infinite;
-      opacity: 0.8;
-      z-index: 1;
-    }
-
-    @keyframes floatUp {
-      from { transform: translateY(0) scale(1); opacity: 0.8; }
-      to { transform: translateY(-100vh) scale(1.6); opacity: 0; }
-    }
-
-    /* Typing effect */
-    .typing {
-      border-right: 2px solid #d6336c;
+    /* Message area */
+    #message {
+      margin-top: 16px;
+      text-align: left;
+      font-size: clamp(1rem, 2.6vw, 1.15rem);
+      line-height: 1.9;
       white-space: pre-wrap;
-      overflow: hidden;
-      display: inline-block;
-      animation: blink 0.8s infinite;
+      opacity: 0; transform: translateY(8px);
+      transition: opacity .8s ease, transform .8s ease;
     }
 
-    @keyframes blink {
-      50% { border-color: transparent; }
-    }
+    .typing { border-right: 2px solid #d6336c; display: inline-block; animation: caret 1s steps(1) infinite; }
+    @keyframes caret { 50% { border-color: transparent; } }
 
-    /* Responsive adjustments */
-    @media (min-width: 768px) {
-      h1 { font-size: 3rem; }
-      #message { font-size: 1.3rem; max-width: 700px; }
-      .heart { font-size: 2.5rem; }
+    .hearts, .confetti { position: fixed; inset: 0; pointer-events: none; z-index: -1; }
+
+    /* Footer note */
+    .note { margin-top: 14px; font-size: 0.9rem; opacity: 0.7; }
+
+    /* Animations */
+    @keyframes fadeIn { from {opacity: 0} to {opacity: 1} }
+    @keyframes fadeInUp { from {opacity: 0; transform: translateY(8px)} to {opacity: 1; transform: translateY(0)} }
+    @keyframes pop { from { transform: translateY(8px) scale(.98); opacity:.8 } to { transform:none; opacity:1 } }
+
+    /* Reduce motion preference */
+    @media (prefers-reduced-motion: reduce) {
+      * { animation: none !important; transition: none !important; }
     }
   </style>
 </head>
 <body>
-  <h1>🎂 Happy Birthday My Love 🎂</h1>
+  <!-- Background layers -->
+  <canvas id="confetti" class="confetti" aria-hidden="true"></canvas>
+  <canvas id="hearts" class="hearts" aria-hidden="true"></canvas>
 
-  <button id="revealBtn">Click to Reveal My Heart 💌</button>
+  <main class="wrap">
+    <h1>🎂 Happy Birthday, My Love 🎂</h1>
+    <p class="subtitle">A tiny website, for a heart bigger than the sky ✨</p>
 
-  <div id="message">
-    <p id="text" class="typing"></p>
-    <div class="heart">❤️❤️❤️</div>
-  </div>
+    <section class="card" aria-live="polite">
+      <div class="actions">
+        <button id="revealBtn">Open Your Birthday Surprise 💌</button>
+        <button id="musicBtn" title="Play soft music" aria-label="Play music">🎶 Play Music</button>
+      </div>
+
+      <div id="message" role="region" aria-label="Love message">
+        <span id="typed" class="typing"></span>
+      </div>
+
+      <!-- Optional audio: replace music.mp3 with your own file name in the same folder -->
+      <audio id="audio" preload="none">
+        <source src="music.mp3" type="audio/mpeg" />
+      </audio>
+    </section>
+  </main>
 
   <script>
-    const revealBtn = document.getElementById("revealBtn");
-    const message = document.getElementById("message");
-    const textElement = document.getElementById("text");
+    // ====== Creative message ======
+    const loveMessage = `ROFAIDA, MY DEAR ROFAIDA ❤️\n\n` +
+`If the sky kept a diary, it would write about your smile.\n` +
+`If mornings had a favorite song, it would be your laugh.\n\n` +
+`You are a wonderful person — the gentle spark that lights my days,\n` +
+`the calm harbor for my heart, the nour of my life.\n` +
+`With you, the ordinary turns magical and every road feels like home.\n\n` +
+`I am always proud of you — of your courage, your kindness,\n` +
+`and the way you turn dreams into plans and plans into reality.\n` +
+`I deeply love you, in the quiet moments and the loud ones,\n` +
+`in the sunshine and the rain — in every heartbeat.\n\n` +
+`With me, you will always receive the love and the treatment you deserve…\n` +
+`and even more, for as long as I breathe.\n\n` +
+`I can’t wait to celebrate your birthday with you —\n` +
+`to hold your hand, count wishes with you, and make this day glow.\n\n` +
+`Happy Birthday, my love. Today, and always, you are the nour of my life. ✨`;
 
-    const loveMessage = 
-`ROFAIDA, MY DEAR ROFAIDA ❤️
+    const revealBtn = document.getElementById('revealBtn');
+    const typed = document.getElementById('typed');
+    const messageBox = document.getElementById('message');
+    const audio = document.getElementById('audio');
+    const musicBtn = document.getElementById('musicBtn');
 
-From the very first moment you came into my life, 
-everything became brighter, softer, and full of meaning.  
-You are not just a wonderful person — you are the light of my soul, 
-the nour of my life, and my forever love. 🌹
+    let revealed = false;
 
-With you, I promise you will always receive the love, 
-the care, and the treatment you truly deserve… and even more. 💕  
-
-I am always proud of you, more than words can say.  
-I deeply love you with all my heart, and I can’t wait to celebrate 
-your birthday with you and make it unforgettable. 🎉  
-
-Happy Birthday, my love — today we celebrate YOU, 
-the most beautiful gift in my life. 💖`;
-
-    revealBtn.addEventListener("click", () => {
-      message.style.opacity = "1";
-      message.style.transform = "translateY(0)";
-      revealBtn.style.display = "none";
-
-      // typing effect
-      let i = 0;
-      function typeWriter() {
-        if (i < loveMessage.length) {
-          textElement.textContent += loveMessage.charAt(i);
-          i++;
-          setTimeout(typeWriter, 50);
-        }
-      }
-      typeWriter();
+    revealBtn.addEventListener('click', async () => {
+      if (revealed) return;
+      revealed = true;
+      messageBox.style.opacity = '1';
+      messageBox.style.transform = 'translateY(0)';
+      typeOut(loveMessage, typed, 18, 40); // min & max typing speed (ms)
+      // try to start music on first user gesture (will play only if a file exists)
+      try { await audio.play(); musicBtn.textContent = '⏸️ Pause Music'; } catch (e) { /* ignored */ }
     });
 
-    // Confetti animation
-    function createConfetti() {
-      const confetti = document.createElement("div");
-      confetti.classList.add("confetti");
-      confetti.style.left = Math.random() * window.innerWidth + "px";
-      confetti.style.backgroundColor = ["#ff99cc", "#ffccdd", "#ffe6e6", "#ffffff"][Math.floor(Math.random() * 4)];
-      confetti.style.animationDuration = (Math.random() * 3 + 3) + "s";
-      confetti.style.opacity = Math.random();
-      document.body.appendChild(confetti);
+    musicBtn.addEventListener('click', async () => {
+      if (audio.paused) { try { await audio.play(); musicBtn.textContent = '⏸️ Pause Music'; } catch(e){} }
+      else { audio.pause(); musicBtn.textContent = '🎶 Play Music'; }
+    });
 
-      setTimeout(() => { confetti.remove(); }, 6000);
+    function typeOut(str, el, min=15, max=35) {
+      el.textContent = '';
+      let i = 0;
+      (function tick(){
+        if (i <= str.length) {
+          el.textContent = str.slice(0, i);
+          i++;
+          const jitter = Math.random() * (max - min) + min;
+          setTimeout(tick, jitter);
+        } else {
+          el.classList.remove('typing');
+        }
+      })();
     }
-    setInterval(createConfetti, 300);
 
-    // Floating hearts
-    function createHeart() {
-      const heart = document.createElement("div");
-      heart.classList.add("floating-heart");
-      heart.textContent = "💖";
-      heart.style.left = Math.random() * window.innerWidth + "px";
-      heart.style.fontSize = (Math.random() * 20 + 20) + "px";
-      heart.style.animationDuration = (Math.random() * 3 + 4) + "s";
-      document.body.appendChild(heart);
-      setTimeout(() => heart.remove(), 7000);
+    // ====== Floating hearts background (canvas) ======
+    const heartsCanvas = document.getElementById('hearts');
+    const hctx = heartsCanvas.getContext('2d');
+    const confettiCanvas = document.getElementById('confetti');
+    const cctx = confettiCanvas.getContext('2d');
+
+    function resize() {
+      heartsCanvas.width = confettiCanvas.width = window.innerWidth;
+      heartsCanvas.height = confettiCanvas.height = window.innerHeight;
     }
-    setInterval(createHeart, 1200);
+    resize();
+    window.addEventListener('resize', resize);
+
+    // Hearts particles
+    const hearts = Array.from({length: 30}, () => makeHeart());
+    function makeHeart() {
+      return {
+        x: Math.random() * heartsCanvas.width,
+        y: heartsCanvas.height + Math.random() * heartsCanvas.height,
+        size: 10 + Math.random() * 18,
+        speed: 0.4 + Math.random() * 0.8,
+        drift: -0.3 + Math.random() * 0.6,
+        alpha: 0.5 + Math.random() * 0.5
+      };
+    }
+
+    function drawHeart(x, y, size, alpha) {
+      hctx.save();
+      hctx.translate(x, y);
+      hctx.rotate(Math.PI / 4);
+      hctx.globalAlpha = alpha;
+      hctx.fillStyle = '#ff6b9f';
+      const s = size;
+      hctx.fillRect(0, 0, s, s);
+      // circles to make the heart shape
+      hctx.beginPath();
+      hctx.arc(0, s/2, s/2, Math.PI/2, Math.PI*1.5);
+      hctx.arc(s/2, 0, s/2, Math.PI, Math.PI*2);
+      hctx.closePath();
+      hctx.fill();
+      hctx.restore();
+    }
+
+    // Confetti particles
+    const confetti = Array.from({length: 80}, () => makeConfetti());
+    function makeConfetti() {
+      const colors = ['#ffd1e1','#ffc2dd','#ffe4ef','#ffffff'];
+      return {
+        x: Math.random() * confettiCanvas.width,
+        y: -Math.random() * confettiCanvas.height,
+        size: 3 + Math.random() * 5,
+        speed: 0.6 + Math.random() * 1.2,
+        rot: Math.random() * Math.PI,
+        rotSpeed: -0.03 + Math.random() * 0.06,
+        color: colors[Math.floor(Math.random()*colors.length)],
+        drift: -0.4 + Math.random() * 0.8
+      };
+    }
+
+    function loop() {
+      // hearts
+      hctx.clearRect(0,0,heartsCanvas.width, heartsCanvas.height);
+      for (const p of hearts) {
+        p.y -= p.speed;
+        p.x += p.drift;
+        if (p.y < -40 || p.x < -40 || p.x > heartsCanvas.width + 40) {
+          Object.assign(p, makeHeart(), { y: heartsCanvas.height + 20 });
+        }
+        drawHeart(p.x, p.y, p.size, p.alpha);
+      }
+
+      // confetti
+      cctx.clearRect(0,0,confettiCanvas.width, confettiCanvas.height);
+      for (const f of confetti) {
+        f.y += f.speed;
+        f.x += f.drift;
+        f.rot += f.rotSpeed;
+        if (f.y > confettiCanvas.height + 10) Object.assign(f, makeConfetti(), { y: -20 });
+        cctx.save();
+        cctx.translate(f.x, f.y);
+        cctx.rotate(f.rot);
+        cctx.fillStyle = f.color;
+        cctx.fillRect(-f.size/2, -f.size/2, f.size, f.size);
+        cctx.restore();
+      }
+
+      requestAnimationFrame(loop);
+    }
+    loop();
   </script>
 </body>
 </html>
