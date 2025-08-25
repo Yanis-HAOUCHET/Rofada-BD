@@ -2,37 +2,67 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Happy Birthday My Love ❤️</title>
   <style>
     body {
       margin: 0;
       padding: 0;
       font-family: 'Poppins', sans-serif;
-      background: linear-gradient(135deg, #ff9a9e, #fad0c4, #fbc2eb);
-      color: white;
+      background: linear-gradient(135deg, #ffe6eb, #fff0f5, #ffeaf4);
+      color: #4a2c2a;
       text-align: center;
       overflow-x: hidden;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
     }
 
     h1 {
-      font-size: 4rem;
-      margin-top: 60px;
-      text-shadow: 2px 2px 8px rgba(0,0,0,0.3);
+      font-size: 2.2rem;
+      color: #d6336c;
+      text-shadow: 1px 1px 6px rgba(0,0,0,0.1);
       animation: fadeIn 2s ease-in-out;
     }
 
-    p {
-      font-size: 1.5rem;
-      max-width: 700px;
+    #message {
+      font-size: 1.1rem;
+      max-width: 90%;
       margin: 20px auto;
       line-height: 1.8;
-      animation: fadeInUp 3s ease-in-out;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 1s ease;
+      background: rgba(255, 240, 245, 0.9);
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.1);
     }
 
     .heart {
-      font-size: 3rem;
-      color: #ff3366;
+      font-size: 2rem;
+      color: #e63978;
+      margin-top: 15px;
       animation: pulse 1.5s infinite;
+    }
+
+    button {
+      background: #ff80ab;
+      color: white;
+      border: none;
+      padding: 12px 25px;
+      font-size: 1rem;
+      border-radius: 25px;
+      cursor: pointer;
+      margin-top: 20px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+      transition: background 0.3s;
+    }
+
+    button:hover {
+      background: #ff5c8d;
     }
 
     @keyframes fadeIn {
@@ -40,50 +70,105 @@
       to { opacity: 1; }
     }
 
-    @keyframes fadeInUp {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
     @keyframes pulse {
       0% { transform: scale(1); }
-      50% { transform: scale(1.3); }
+      50% { transform: scale(1.2); }
       100% { transform: scale(1); }
     }
 
     .confetti {
       position: fixed;
       top: -10px;
-      width: 10px;
-      height: 10px;
+      width: 8px;
+      height: 8px;
       background: #fff;
       animation: fall 5s linear infinite;
+      z-index: -1;
     }
 
     @keyframes fall {
-      from { transform: translateY(0); }
-      to { transform: translateY(100vh); }
+      from { transform: translateY(0) rotate(0deg); }
+      to { transform: translateY(100vh) rotate(360deg); }
+    }
+
+    /* Typing animation */
+    .typing {
+      border-right: 2px solid #d6336c;
+      white-space: pre-wrap;
+      overflow: hidden;
+      display: inline-block;
+      animation: typing 6s steps(40, end), blink 0.8s infinite;
+    }
+
+    @keyframes typing {
+      from { width: 0; }
+      to { width: 100%; }
+    }
+
+    @keyframes blink {
+      50% { border-color: transparent; }
+    }
+
+    /* Responsive text sizes */
+    @media (min-width: 768px) {
+      h1 { font-size: 3rem; }
+      #message { font-size: 1.3rem; max-width: 700px; }
+      .heart { font-size: 2.5rem; }
     }
   </style>
 </head>
 <body>
-  <h1>🎉 Happy Birthday My Love 🎉</h1>
-  <p>
-    To the most amazing girl in the world 💖,  
-    You light up my life with your smile, your kindness, and your love.  
-    On your special day, I just want to remind you how deeply I love you  
-    and how grateful I am to have you by my side.  
-    May this year bring you endless happiness, laughter, and all your dreams come true.  
-  </p>
-  <div class="heart">❤️❤️❤️</div>
-  
+  <h1>🎂 Happy Birthday My Lovely Little Girl 🎂</h1>
+
+  <button id="revealBtn">Click to Reveal My Heart 💌</button>
+
+  <div id="message">
+    <p id="text" class="typing"></p>
+    <div class="heart">❤️❤️❤️</div>
+  </div>
+
   <script>
+    const revealBtn = document.getElementById("revealBtn");
+    const message = document.getElementById("message");
+    const textElement = document.getElementById("text");
+
+    const loveMessage = 
+`ROFAIDA, MY DEAR ROFAIDA ❤️
+
+From the very first moment you came into my life, 
+everything became brighter, softer, and full of meaning. 
+You are not just a wonderful person — you are the light of my soul, 
+the nour of my life, and my forever love. 🌹
+
+With you, I promise you will always receive the love, 
+the care, and the treatment you truly deserve… and even more. 💕 
+
+Happy Birthday, my love. Today we celebrate YOU, 
+the most beautiful gift in my life. 🎉`;
+
+    revealBtn.addEventListener("click", () => {
+      message.style.opacity = "1";
+      message.style.transform = "translateY(0)";
+      revealBtn.style.display = "none";
+
+      // typing effect
+      let i = 0;
+      function typeWriter() {
+        if (i < loveMessage.length) {
+          textElement.textContent += loveMessage.charAt(i);
+          i++;
+          setTimeout(typeWriter, 50);
+        }
+      }
+      typeWriter();
+    });
+
     // Confetti animation
     function createConfetti() {
       const confetti = document.createElement("div");
       confetti.classList.add("confetti");
       confetti.style.left = Math.random() * window.innerWidth + "px";
-      confetti.style.backgroundColor = ["#ff3366", "#ffcc00", "#66ffcc", "#ffffff"][Math.floor(Math.random() * 4)];
+      confetti.style.backgroundColor = ["#ff99cc", "#ffccdd", "#ffe6e6", "#ffffff"][Math.floor(Math.random() * 4)];
       confetti.style.animationDuration = (Math.random() * 3 + 2) + "s";
       confetti.style.opacity = Math.random();
       document.body.appendChild(confetti);
@@ -91,7 +176,7 @@
       setTimeout(() => { confetti.remove(); }, 5000);
     }
 
-    setInterval(createConfetti, 200);
+    setInterval(createConfetti, 300);
   </script>
 </body>
 </html>
